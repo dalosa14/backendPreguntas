@@ -4,6 +4,10 @@ const router = express.Router();
 const Pregunta = require('../models/preguntas')
 router.post('/add', async(req, res) => {
     try {
+        if (!req.body.Pregunta) {
+            return         res.send({ success: false, msg: 'pregunta no añadida' })
+
+        }
         const pregunta = new Pregunta(req.body)
         await pregunta.save()
         res.send({ success: true, msg: 'pregunta añadida' })
